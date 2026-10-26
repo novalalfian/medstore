@@ -1,0 +1,90 @@
+version: "3.9"
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: medstore-db
+    environment:
+      POSTGRES_DB: medstore
+      POSTGRES_USER: medstore
+      POSTGRES_PASSWORD: medstore_secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medstore"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medstore-net
+
+  # Redis (Session & Cache)
+  redis:
+    image: redis:7-alpine
+    container_name: medstore-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medstore-net
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: medstore-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://medstore:medstore_secret@postgres:5432/medstore
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: medstore-super-secret-key-change-in-production
+      UPLOAD_DIR: /app/uploads
+      CORS_ORIGINS: '["http://localhost:3000","http://localhost:8000"]'
+    ports:
+      - "8000:8000"
+    volumes:
+      - upload_data:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - medstore-net
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: medstore-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: /api
+      BACKEND_INTERNAL_URL: http://backend:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - medstore-net
+
+volumes:
+  postgres_data:
+  redis_data:
+  upload_data:
+
+networks:
+  medstore-net:
+    driver: bridge

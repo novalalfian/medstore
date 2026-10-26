@@ -1,0 +1,68 @@
+  ▲ Next.js 14.2.15
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./src/app/(dashboard)/settings/appearance/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\novaa\Documents\New folder\frontend\src\app\(dashboard)\settings\appearance\page.tsx[0m:46:1]
+ [2m46[0m |   ];
+ [2m47[0m | 
+ [2m48[0m |   return (
+ [2m49[0m |     <div className="max-w-4xl mx-auto space-y-6 animate-in">
+    : [31;1m     ^^^[0m
+ [2m50[0m |       <div className="flex items-center gap-3">
+ [2m51[0m |         <button onClick={() => window.history.back()} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+ [2m52[0m |           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></path></svg>
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/(dashboard)/settings/appearance/page.tsx
+
+./src/app/(dashboard)/settings/notifications/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\novaa\Documents\New folder\frontend\src\app\(dashboard)\settings\notifications\page.tsx[0m:60:1]
+ [2m60[0m |   ];
+ [2m61[0m | 
+ [2m62[0m |   return (
+ [2m63[0m |     <div className="max-w-4xl mx-auto space-y-6 animate-in">
+    : [31;1m     ^^^[0m
+ [2m64[0m |       <div className="flex items-center gap-3">
+ [2m65[0m |         <button onClick={() => window.history.back()} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+ [2m66[0m |           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></path></svg>
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/(dashboard)/settings/notifications/page.tsx
+
+./src/app/(dashboard)/settings/security/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\novaa\Documents\New folder\frontend\src\app\(dashboard)\settings\security\page.tsx[0m:86:1]
+ [2m86[0m |   };
+ [2m87[0m | 
+ [2m88[0m |   return (
+ [2m89[0m |     <div className="max-w-4xl mx-auto space-y-6 animate-in">
+    : [31;1m     ^^^[0m
+ [2m90[0m |       <div className="flex items-center gap-3">
+ [2m91[0m |         <button onClick={() => window.history.back()} className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+ [2m92[0m |           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></path></svg>
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/(dashboard)/settings/security/page.tsx
+
+
+> Build failed because of webpack errors
